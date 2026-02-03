@@ -2,18 +2,18 @@ import Button from "@/src/components/Button";
 import ButtonGroup from "@/src/components/ButtonGroup";
 import IconButton from "@/src/components/IconButton";
 import useBridge from "@/src/hooks/useBridge";
-import modalAtom from "@/src/store/modal";
-import webViewStore from "@/src/store/webview";
-import { useAtom, useAtomValue } from "jotai";
+import useModal from "@/src/hooks/useModal";
+import webViewRefAtom from "@/src/store/webview";
+import { useAtomValue } from "jotai";
 import { Check } from "lucide-react-native";
 import React from "react";
 import { Text, View } from "react-native";
 import { ConfirmProps } from "./props.type";
 
-const ConfirmModal = ({ title, message }: ConfirmProps) => {
-  const [modalState, setModalState] = useAtom(modalAtom);
-  const webViewRef = useAtomValue(webViewStore);
+const ConfirmModal = ({ title, message, buttonOptions }: ConfirmProps) => {
+  const webViewRef = useAtomValue(webViewRefAtom);
   const { postMessage } = useBridge(webViewRef.ref);
+  const { closeModal } = useModal();
 
   return (
     <View className="justify-between items-center h-full">
@@ -34,23 +34,24 @@ const ConfirmModal = ({ title, message }: ConfirmProps) => {
         </View>
       </View>
 
-      <View className="">
+      <View>
         <ButtonGroup type="action">
           <Button
             flex
             onTap={() => {
-              postMessage("ACTION_CONFIRMED");
+              closeModal();
+              // setModalState({ ...modalState, visible: false });
             }}
           >
-            확인
+            {buttonOptions?.cancelText || "취소"}
           </Button>
           <Button
             flex
             onTap={() => {
-              setModalState({ ...modalState, visible: false });
+              postMessage({ type: "ACTION_CONFIRMED" });
             }}
           >
-            adsf
+            {buttonOptions?.confirmText || "확인"}
           </Button>
         </ButtonGroup>
       </View>

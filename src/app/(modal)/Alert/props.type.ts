@@ -1,5 +1,5 @@
-interface AlertProps {
-  title: string;
-  message: string;
-  callbackMessage: string;
-}
+import { AlertModalData } from "@/src/types/modal";
+
+interface AlertProps extends AlertModalData {}
+
+export type { AlertProps };

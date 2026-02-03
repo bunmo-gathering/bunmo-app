@@ -5,13 +5,12 @@ import "react-native-reanimated";
 
 import Modal from "@/src/components/Modal";
 import { useColorScheme } from "@/src/hooks/use-color-scheme";
-import modalAtom from "@/src/store/modal";
 import {
   DarkTheme,
   DefaultTheme,
   ThemeProvider,
 } from "@react-navigation/native";
-import { useAtomValue } from "jotai";
+import useModal from "../hooks/useModal";
 
 export const unstable_settings = {
   anchor: "(tabs)",
@@ -19,7 +18,7 @@ export const unstable_settings = {
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
-  const modalState = useAtomValue(modalAtom);
+  const { isOpen } = useModal();
 
   return (
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
@@ -29,7 +28,7 @@ export default function RootLayout() {
       </Stack>
       <StatusBar style="auto" />
 
-      {modalState.visible && <Modal />}
+      {isOpen && <Modal />}
     </ThemeProvider>
   );
 }

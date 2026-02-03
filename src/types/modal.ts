@@ -1,14 +1,29 @@
 import { Variant } from "./bridgeEvnet";
 
+interface ModalData {
+  title: string;
+  message: string;
+
+  buttonOptions?: ButtonOptions;
+}
+
+interface ButtonOptions {
+  confirmText?: string;
+  cancelText?: string;
+}
+
+interface ConfirmModalData extends ModalData {
+  buttonOptions?: Pick<ButtonOptions, "confirmText" | "cancelText">;
+}
+
+interface AlertModalData extends ModalData {
+  buttonOptions?: Pick<ButtonOptions, "confirmText">;
+}
+
 interface ModalState {
   visible: boolean;
   variant: Variant | null;
-  content: any | null;
+  payload: ConfirmModalData | AlertModalData | null;
 }
 
-interface Confirm {
-  title: string;
-  message: string;
-}
-
-export type { Confirm, ModalState };
+export type { AlertModalData, ConfirmModalData, ModalState };

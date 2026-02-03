@@ -16,6 +16,31 @@ const Modal = () => {
     console.log(modalState.variant);
   }, [modalState]);
 
+  const renderModal = () => {
+    if (!modalState.visible || !modalState.payload) return null;
+
+    switch (modalState.variant) {
+      case "CONFIRM":
+        return (
+          <ConfirmModal
+            title={modalState.payload.title}
+            message={modalState.payload.message}
+            buttonOptions={modalState.payload?.buttonOptions}
+          />
+        );
+      case "ALERT":
+        return (
+          <AlertModal
+            title={modalState.payload.title}
+            message={modalState.payload.message}
+            buttonOptions={modalState.payload.buttonOptions}
+          />
+        );
+      default:
+        return null;
+    }
+  };
+
   return (
     <Animated.View
       className="absolute w-full h-full z-50 items-center justify-center"
@@ -25,17 +50,9 @@ const Modal = () => {
       {/* overlay */}
       <View className="absolute opacity-50 bg-black w-full h-full" />
 
+      {/* modal */}
       <Animated.View className={modalStyle()} {...modalAnimation}>
-        {modalState.variant === "CONFIRM" ? (
-          <ConfirmModal
-            title={modalState.content.title}
-            message={modalState.content.message}
-          />
-        ) : modalState.variant === "ALERT" ? (
-          <AlertModal />
-        ) : (
-          <></>
-        )}
+        {renderModal()}
       </Animated.View>
     </Animated.View>
   );

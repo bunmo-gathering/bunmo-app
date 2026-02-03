@@ -1,12 +1,12 @@
-import { BridgeEventType } from "../constants/event";
+import { BridgeGetEventToken, BridgePostEventToken } from "../constants/event";
 
 type Action = "OPEN" | "CLOSE";
 type Target = "MODAL";
 type Variant = "CONFIRM" | "ALERT" | null;
 
 interface BridgeEvent {
-  type: BridgeEventType;
-  payload: any;
+  type: BridgeGetEventToken | BridgePostEventToken;
+  payload?: any;
 }
 
 export type { Action, BridgeEvent, Target, Variant };

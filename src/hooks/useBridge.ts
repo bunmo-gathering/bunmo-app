@@ -1,7 +1,6 @@
 import { useSetAtom } from "jotai";
 import { RefObject } from "react";
 import WebView, { WebViewMessageEvent } from "react-native-webview";
-import { BridgePostEventToken } from "../constants/event";
 import { getBridgeEventSegment } from "../libs/bridgeEvent";
 import modalAtom from "../store/modal";
 import { BridgeEvent } from "../types/bridgeEvnet";
@@ -19,7 +18,7 @@ const useBridge = (webViewRef: RefObject<WebView | null>) => {
         modalState({
           visible: segments.action === "OPEN" ? true : false,
           variant: segments.variant,
-          content: response.payload,
+          payload: response.payload,
         });
         break;
 
@@ -28,16 +27,13 @@ const useBridge = (webViewRef: RefObject<WebView | null>) => {
     }
   };
 
-  const postMessage = (message: BridgePostEventToken) => {
+  const postMessage = ({ type, payload }: BridgeEvent) => {
     if (webViewRef.current == null) return;
 
     webViewRef.current.postMessage(
       JSON.stringify({
-        type: message,
-        payload: {
-          title: "Modal Test",
-          message: "이 동작은 분모 앱에서만 확인 가능합니다.",
-        },
+        type: type,
+        payload: payload,
       }),
     );
   };

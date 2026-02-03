@@ -1,14 +1,5 @@
-interface ConfirmProps {
-  title: string;
-  message: string;
+import { ConfirmModalData } from "@/src/types/modal";
 
-  buttonOprions?: {
-    confirmText?: string;
-    cancelText?: string;
-
-    confirmCallback?: () => void;
-    cancelCallback?: () => void;
-  };
-}
+interface ConfirmProps extends ConfirmModalData {}
 
 export type { ConfirmProps };
