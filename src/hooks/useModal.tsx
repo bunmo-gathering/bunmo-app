@@ -4,7 +4,12 @@ import modalAtom from "../store/modal";
 const useModal = () => {
   const [modal, setModal] = useAtom(modalAtom);
 
-  const openModal = () => {};
+  const openModal = () => {
+    setModal({
+      ...modal,
+      visible: true,
+    });
+  };
 
   const closeModal = () => {
     setModal({
@@ -17,7 +22,7 @@ const useModal = () => {
 
   const isOpen = modal.visible;
 
-  return { closeModal, isOpen };
+  return { openModal, closeModal, isOpen };
 };
 
 export default useModal;

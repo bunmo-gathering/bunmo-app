@@ -18,7 +18,7 @@ export const unstable_settings = {
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
-  const { isOpen } = useModal();
+  const { isOpen: isModalOpen } = useModal();
 
   return (
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
@@ -28,7 +28,7 @@ export default function RootLayout() {
       </Stack>
       <StatusBar style="auto" />
 
-      {isOpen && <Modal />}
+      {isModalOpen && <Modal />}
     </ThemeProvider>
   );
 }
