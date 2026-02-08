@@ -1,144 +1,14 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   // NOTE: Update this to include the paths to all files that contain Nativewind classes.
-  content: ["./components/**/*.{js,jsx,ts,tsx}", "./app/**/*.{js,jsx,ts,tsx}"],
+  content: [
+    "./src/components/**/*.{js,jsx,ts,tsx}",
+    "./src/app/**/*.{js,jsx,ts,tsx}",
+  ],
   presets: [require("nativewind/preset")],
   darkMode: "class",
   theme: {
     extend: {
-      fontSize: {
-        // semibold 600, medium 500, bold 700
-        title1: {
-          bold: [
-            "72px",
-            {
-              lineHeight: "90px",
-              fontWeight: "700",
-              letterSpacing: "-0.25%",
-            },
-          ],
-          medium: [
-            "72px",
-            {
-              lineHeight: "90px",
-              fontWeight: "500",
-              letterSpacing: "-0.25%",
-            },
-          ],
-        },
-
-        title2: {
-          bold: [
-            "48px",
-            {
-              lineHeight: "60px",
-              fontWeight: "700",
-            },
-          ],
-          medium: [
-            "48px",
-            {
-              lineHeight: "60px",
-              fontWeight: "500",
-            },
-          ],
-        },
-
-        title3: {
-          bold: [
-            "30px",
-            {
-              lineHeight: "36px",
-              fontWeight: "700",
-            },
-          ],
-        },
-
-        title4: {
-          semibold: [
-            "22px",
-            {
-              lineHeight: "36px",
-              fontWeight: "600",
-            },
-          ],
-        },
-
-        title5: {
-          bold: [
-            "20px",
-            {
-              lineHeight: "24px",
-              fontWeight: "700",
-            },
-          ],
-        },
-
-        body1: {
-          bold: [
-            "18px",
-            {
-              lineHeight: "24px",
-              fontWeight: "700",
-            },
-          ],
-          medium: [
-            "18px",
-            {
-              lineHeight: "24px",
-              fontWeight: "500",
-            },
-          ],
-        },
-
-        body2: {
-          semibold: [
-            "15px",
-            {
-              lineHeight: "20px",
-              fontWeight: "600",
-            },
-          ],
-          medium: [
-            "15px",
-            {
-              lineHeight: "20px",
-              fontWeight: "500",
-            },
-          ],
-        },
-
-        caption: {
-          regular: [
-            "12px",
-            {
-              lineHeight: "18px",
-            },
-          ],
-          medium: [
-            "12px",
-            {
-              lineHeight: "18px",
-              fontWeight: "500",
-            },
-          ],
-          semibold: [
-            "12px",
-            {
-              lineHeight: "18px",
-              fontWeight: "600",
-            },
-          ],
-          bold: [
-            "12px",
-            {
-              lineHeight: "18px",
-              fontWeight: "700",
-            },
-          ],
-        },
-      },
-
       colors: {
         primary: "var(--primary)",
         surfaceTint: "var(--surfaceTint)",
@@ -190,7 +60,108 @@ module.exports = {
         surfaceContainerHigh: "var(--surfaceContainerHigh)",
         surfaceContainerHighest: "var(--surfaceContainerHighest)",
       },
+
+      padding: {
+        4.5: `calc(var(--spacing) * 4.5)` /* 1.125rem = 18px */,
+      },
     },
   },
-  plugins: [],
+  plugins: [
+    function ({ addUtilities }) {
+      addUtilities({
+        // Title1
+        ".text-title1-bold": {
+          fontSize: "72px",
+          lineHeight: "90px",
+          fontWeight: "700",
+          letterSpacing: "-0.18px",
+        },
+        ".text-title1-medium": {
+          fontSize: "72px",
+          lineHeight: "90px",
+          fontWeight: "500",
+          letterSpacing: "-0.18px",
+        },
+
+        // Title2
+        ".text-title2-bold": {
+          fontSize: "48px",
+          lineHeight: "60px",
+          fontWeight: "700",
+        },
+        ".text-title2-medium": {
+          fontSize: "48px",
+          lineHeight: "60px",
+          fontWeight: "500",
+        },
+
+        // Title3
+        ".text-title3-bold": {
+          fontSize: "30px",
+          lineHeight: "36px",
+          fontWeight: "700",
+        },
+
+        // Title4
+        ".text-title4-semibold": {
+          fontSize: "22px",
+          lineHeight: "36px",
+          fontWeight: "600",
+        },
+
+        // Title5
+        ".text-title5-bold": {
+          fontSize: "20px",
+          lineHeight: "24px",
+          fontWeight: "700",
+        },
+
+        // Body1
+        ".text-body1-bold": {
+          fontSize: "18px",
+          lineHeight: "24px",
+          fontWeight: "700",
+        },
+        ".text-body1-medium": {
+          fontSize: "18px",
+          lineHeight: "24px",
+          fontWeight: "500",
+        },
+
+        // Body2
+        ".text-body2-semibold": {
+          fontSize: "15px",
+          lineHeight: "20px",
+          fontWeight: "600",
+        },
+        ".text-body2-medium": {
+          fontSize: "15px",
+          lineHeight: "20px",
+          fontWeight: "500",
+        },
+
+        // Caption
+        ".text-caption-regular": {
+          fontSize: "12px",
+          lineHeight: "18px",
+          fontWeight: "400",
+        },
+        ".text-caption-medium": {
+          fontSize: "12px",
+          lineHeight: "18px",
+          fontWeight: "500",
+        },
+        ".text-caption-semibold": {
+          fontSize: "12px",
+          lineHeight: "18px",
+          fontWeight: "600",
+        },
+        ".text-caption-bold": {
+          fontSize: "12px",
+          lineHeight: "18px",
+          fontWeight: "700",
+        },
+      });
+    },
+  ],
 };
