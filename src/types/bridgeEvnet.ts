@@ -1,8 +1,8 @@
 import { BridgeGetEventToken, BridgePostEventToken } from "../constants/event";
 
 type Action = "OPEN" | "CLOSE";
-type Target = "MODAL";
-type Variant = "CONFIRM" | "ALERT" | null;
+type Target = "MODAL" | "BOTTOMSHEET";
+type Variant = "CONFIRM" | "ALERT" | "SELECT" | null;
 
 interface BridgeEvent {
   type: BridgeGetEventToken | BridgePostEventToken;

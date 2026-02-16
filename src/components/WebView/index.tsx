@@ -17,7 +17,7 @@ const WebView = () => {
       <WebViewClient
         ref={webViewRef}
         source={{
-          uri: `${"http://172.16.20.182:3000"}`,
+          uri: `${"http://localhost:3000"}`,
         }}
         style={{
           backgroundColor: backgroundColor,
