@@ -1,16 +1,14 @@
 import SelectBottomSheet from "@/src/app/(bottom-sheet)/Select";
 import bottomSheetAtom from "@/src/store/bottomSheet";
-import clsx from "clsx";
 import { useAtom } from "jotai";
 import React from "react";
 import { Pressable } from "react-native";
 import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 import bottomSheetAnimation from "./animate";
+import bottomSheetStyle from "./style";
 
 const BottomSheet = () => {
   const [bottomSheetState, setBottomSheetState] = useAtom(bottomSheetAtom);
-  const { bottom } = useSafeAreaInsets();
 
   const renderBottomSheet = () => {
     if (!bottomSheetState.visible || !bottomSheetState.payload) return null;
@@ -30,12 +28,13 @@ const BottomSheet = () => {
 
   return (
     <Animated.View
-      className="absolute w-full h-full z-50 items-center justify-end"
+      className={bottomSheetStyle.variants.container}
       entering={FadeIn.duration(200)}
       exiting={FadeOut.duration(200)}
     >
+      {/* overlay */}
       <Pressable
-        className="absolute opacity-50 bg-black w-full h-full"
+        className={bottomSheetStyle.variants.overlay}
         onPress={() =>
           setBottomSheetState({
             ...bottomSheetState,
@@ -44,8 +43,9 @@ const BottomSheet = () => {
         }
       />
 
+      {/* sheet */}
       <Animated.View
-        className={clsx("bg-surfaceContainer w-full pt-2 rounded-t-3xl")}
+        className={bottomSheetStyle.variants.sheet}
         {...bottomSheetAnimation}
       >
         {renderBottomSheet()}
