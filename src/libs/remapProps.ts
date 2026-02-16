@@ -1,7 +1,7 @@
-import { Check } from "lucide-react-native";
+import * as LucideIcons from "lucide-react-native";
 import { cssInterop } from "nativewind";
 
-cssInterop(Check, {
+const interopConfig = {
   className: {
     target: "style",
     nativeStyleToProp: {
@@ -11,4 +11,9 @@ cssInterop(Check, {
       height: "size",
     },
   },
+} as const;
+
+// 모든 Lucide 아이콘에 대해 cssInterop 적용
+Object.values(LucideIcons).forEach((Icon) => {
+  cssInterop(Icon as LucideIcons.LucideIcon, interopConfig);
 });

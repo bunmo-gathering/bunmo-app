@@ -2,7 +2,7 @@ import AlertModal from "@/src/app/(modal)/Alert";
 import ConfirmModal from "@/src/app/(modal)/Confirm";
 import modalAtom from "@/src/store/modal";
 import { useAtomValue } from "jotai";
-import React, { useEffect } from "react";
+import React from "react";
 import { View } from "react-native";
 import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
 import "../../libs/remapProps";
@@ -11,10 +11,6 @@ import modalStyle from "./style";
 
 const Modal = () => {
   const modalState = useAtomValue(modalAtom);
-
-  useEffect(() => {
-    console.log(modalState.variant);
-  }, [modalState]);
 
   const renderModal = () => {
     if (!modalState.visible || !modalState.payload) return null;

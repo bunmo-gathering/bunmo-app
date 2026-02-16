@@ -3,7 +3,11 @@
  * 형식: [행동_대상_형태]
  * 예: OPEN_MODAL_CONFIRM, OPEN_BOTTOMSHEET_SELECT, OPEN_TOPSHEET_INFO
  */
-type BridgeGetEventToken = "NONE" | "OPEN_MODAL_CONFIRM" | "OPEN_MODAL_ALERT";
+type BridgeGetEventToken =
+  | "NONE"
+  | "OPEN_MODAL_CONFIRM"
+  | "OPEN_MODAL_ALERT"
+  | "OPEN_BOTTOMSHEET_SELECT";
 
 type BridgePostEventToken = "ACTION_CONFIRMED" | "ACTION_CANCELED";
 

@@ -1,3 +1,4 @@
+import "@/src/libs/remapProps";
 import "@/src/styles/global.css";
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
@@ -10,6 +11,8 @@ import {
   DefaultTheme,
   ThemeProvider,
 } from "@react-navigation/native";
+import BottomSheet from "../components/BottomSheet";
+import useBottomSheet from "../hooks/useBottomSheet";
 import useModal from "../hooks/useModal";
 
 export const unstable_settings = {
@@ -19,6 +22,7 @@ export const unstable_settings = {
 export default function RootLayout() {
   const colorScheme = useColorScheme();
   const { isOpen: isModalOpen } = useModal();
+  const { isOpen: isBottomSheetOpen } = useBottomSheet();
 
   return (
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
@@ -29,6 +33,7 @@ export default function RootLayout() {
       <StatusBar style="auto" />
 
       {isModalOpen && <Modal />}
+      {isBottomSheetOpen && <BottomSheet />}
     </ThemeProvider>
   );
 }
